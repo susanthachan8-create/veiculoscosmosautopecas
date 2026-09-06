@@ -15,14 +15,21 @@
     
     <style>
         /* ===== RESET & BASE ===== */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: #f8fafc;
             color: #0b1a2f;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
         /* ===== ANIMAÇÕES ===== */
@@ -48,18 +55,18 @@
         }
 
         @keyframes floatIcon {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(2deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
-        }
-
-        @keyframes scaleIn {
-            0% { opacity: 0; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1); }
         }
 
         .animate-up {
@@ -77,11 +84,6 @@
             animation: slideInRight 0.9s ease forwards;
         }
 
-        .animate-scale {
-            opacity: 0;
-            animation: scaleIn 0.8s ease forwards;
-        }
-
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
@@ -91,7 +93,7 @@
         /* ===== NAVBAR ===== */
         .navbar-custom {
             background: #0b1a2f !important;
-            padding: 12px 0;
+            padding: 14px 0;
             box-shadow: 0 4px 25px rgba(0,0,0,0.2);
             transition: all 0.3s;
         }
@@ -127,11 +129,19 @@
             margin-right: 6px;
         }
 
+        .navbar-toggler {
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
         /* ===== HERO ===== */
         .hero-section {
             background: linear-gradient(145deg, #0b1a2f 0%, #1a3a5c 100%);
             color: white;
-            padding: 100px 0 80px;
+            padding: 120px 0 90px;
             position: relative;
             overflow: hidden;
             margin-top: 68px;
@@ -253,7 +263,7 @@
             animation: floatIcon 4s ease-in-out infinite;
         }
 
-        /* ===== BOTÃO ===== */
+        /* ===== BOTÕES ===== */
         .btn-whatsapp {
             background: #fbbf24;
             color: #0b1a2f;
@@ -289,6 +299,9 @@
             color: white;
             transition: 0.3s;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-outline-light:hover {
@@ -389,6 +402,12 @@
             line-height: 1.6;
         }
 
+        .card-custom .highlight-number {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fbbf24;
+        }
+
         /* ===== IMAGEM FEATURE ===== */
         .feature-image {
             border-radius: 24px;
@@ -417,7 +436,7 @@
         .privacy-section h4 {
             font-weight: 700;
             color: #0b1a2f;
-            margin-top: 24px;
+            margin-top: 28px;
         }
 
         .privacy-section h4:first-of-type {
@@ -495,6 +514,25 @@
         .contact-item small {
             color: #5a7a94;
             font-size: 0.85rem;
+        }
+
+        /* ===== MAPA (placeholder) ===== */
+        .map-placeholder {
+            background: #e8edf3;
+            border-radius: 20px;
+            padding: 60px 20px;
+            text-align: center;
+            border: 2px dashed #cbd5e1;
+        }
+
+        .map-placeholder i {
+            font-size: 3rem;
+            color: #fbbf24;
+        }
+
+        .map-placeholder p {
+            color: #5a7a94;
+            margin-top: 12px;
         }
 
         /* ===== FOOTER ===== */
@@ -595,6 +633,7 @@
             border: 2px solid #fbbf24;
             opacity: 0;
             visibility: hidden;
+            font-size: 1.3rem;
         }
 
         .back-to-top.visible {
@@ -615,7 +654,7 @@
                 font-size: 2.8rem;
             }
             .hero-section {
-                padding: 70px 0 60px;
+                padding: 80px 0 60px;
             }
             .hero-image img {
                 max-width: 100%;
@@ -631,7 +670,7 @@
                 font-size: 2.2rem;
             }
             .hero-section {
-                padding: 50px 0 40px;
+                padding: 60px 0 40px;
                 text-align: center;
             }
             .hero-badges {
@@ -687,6 +726,10 @@
                 padding: 12px 28px;
                 font-size: 0.9rem;
             }
+            .btn-outline-light {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -695,11 +738,11 @@
     <!-- ===== NAVBAR ===== -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#inicio">
                 <i class="bi bi-car-front"></i> Cosmos Auto Peças
             </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
@@ -832,7 +875,7 @@
         </div>
     </section>
 
-    <!-- ===== DADOS EMPRESA ===== -->
+    <!-- ===== DADOS EMPRESA (CARDS) ===== -->
     <section class="py-4">
         <div class="container">
             <div class="row g-4">
@@ -950,9 +993,207 @@
     <section id="contato" class="py-5">
         <div class="container">
             <h2 class="section-title text-center animate-up">Entre em Contato</h2>
-            <p class="text-center text-muted mb-4 animate-up delay-1" style="font-size: 1
-                sdscdjdnods
+            <p class="text-center text-muted mb-4 animate-up delay-1" style="font-size: 1.1rem;">
+                Estamos prontos para atender você com qualidade e agilidade
+            </p>
+            <div class="row g-4">
+                <div class="col-lg-6 animate-up">
+                    <div class="contact-section">
+                        <div class="contact-item">
+                            <i class="bi bi-telephone"></i>
+                            <div>
+                                <strong>Telefone</strong>
+                                <span>(41) 324****-****</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <span>(41) 324****-****</span>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-geo-alt"></i>
+                            <div>
+                                <strong>Endereço</strong>
+                                <span>Rua Aracy de Carvalho Guimarães Rosa, 310</span>
+                                <small class="d-block text-muted">Cidade Industrial, Curitiba - PR | CEP: 81170-745</small>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-envelope"></i>
+                            <div>
+                                <strong>Correspondência</strong>
+                                <span>Cosmos Auto Peças LTDA</span>
+                                <small class="d-block text-muted">Rua Aracy de Carvalho Guimarães Rosa, 310 - Curitiba/PR</small>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <a href="#" class="btn-whatsapp">
+                                <i class="bi bi-whatsapp"></i> Chamar no WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-right">
+                    <div class="contact-section h-100 d-flex flex-column justify-content-center">
+                        <h4 class="fw-bold"><i class="bi bi-pin-map text-warning"></i> Onde Estamos</h4>
+                        <div class="map-placeholder">
+                            <i class="bi bi-geo-alt"></i>
+                            <p class="fw-bold mb-0">Rua Aracy de Carvalho Guimarães Rosa, 310</p>
+                            <p class="text-muted">Cidade Industrial, Curitiba - PR</p>
+                            <small class="text-muted"><i class="bi bi-clock"></i> Referência: Próximo ao Parque Industrial</small>
+                        </div>
+                        <div class="mt-3">
+                            <small class="text-muted"><i class="bi bi-check-circle-fill text-success"></i> Atendimento rápido e personalizado</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                ccnodnpidc
-                ca´copdfmcas
+    <!-- ===== POLÍTICA DE PRIVACIDADE ===== -->
+    <section id="privacidade" class="py-5">
+        <div class="container">
+            <div class="privacy-section animate-up">
+                <h2 class="section-title text-center">Política de Privacidade</h2>
+                <p class="text-center text-muted mb-4">A Cosmos Auto Peças LTDA respeita sua privacidade e protege seus dados</p>
                 
+                <h4><i class="bi bi-file-lock"></i> Coleta de Dados</h4>
+                <p>Coletamos apenas as informações necessárias para atendimento e comunicação com nossos clientes, como nome, telefone e endereço, sempre com seu consentimento.</p>
+
+                <h4><i class="bi bi-database"></i> Uso das Informações</h4>
+                <p>Os dados fornecidos são utilizados exclusivamente para:</p>
+                <ul>
+                    <li>Atendimento e suporte ao cliente</li>
+                    <li>Envio de informações sobre peças e promoções (com autorização)</li>
+                    <li>Melhoria dos nossos serviços</li>
+                </ul>
+
+                <h4><i class="bi bi-shield-check"></i> Segurança</h4>
+                <p>Adotamos medidas técnicas e organizacionais para proteger seus dados contra acesso não autorizado, alteração ou destruição.</p>
+
+                <h4><i class="bi bi-clock"></i> Retenção</h4>
+                <p>Mantemos seus dados apenas pelo tempo necessário para cumprir as finalidades descritas, respeitando as obrigações legais.</p>
+
+                <h4><i class="bi bi-person-check"></i> Seus Direitos</h4>
+                <p>Você tem direito a acessar, corrigir ou solicitar a exclusão de seus dados pessoais a qualquer momento, entrando em contato conosco.</p>
+
+                <h4><i class="bi bi-calendar-event"></i> Atualizações</h4>
+                <p>Esta política pode ser atualizada periodicamente. Recomendamos que você revise esta página regularmente.</p>
+
+                <div class="text-center mt-4">
+                    <small class="text-muted"><i class="bi bi-clock"></i> Última atualização: 2026</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5><i class="bi bi-car-front"></i> Cosmos Auto Peças</h5>
+                    <p style="color: #8aacc4 !important;">
+                        Comércio a varejo de peças e acessórios usados para veículos automotores. 
+                        Qualidade e confiança desde 2011.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="bi bi-link-45deg"></i> Links Rápidos</h5>
+                    <ul>
+                        <li><a href="#inicio"><i class="bi bi-chevron-right"></i> Início</a></li>
+                        <li><a href="#sobre"><i class="bi bi-chevron-right"></i> Sobre</a></li>
+                        <li><a href="#pecas"><i class="bi bi-chevron-right"></i> Peças</a></li>
+                        <li><a href="#contato"><i class="bi bi-chevron-right"></i> Contato</a></li>
+                        <li><a href="#privacidade"><i class="bi bi-chevron-right"></i> Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="bi bi-info-circle"></i> Dados da Empresa</h5>
+                    <ul>
+                        <li><strong>CNPJ:</strong> 15.799.986/0001-89</li>
+                        <li><strong>IE:</strong> 90617248-82</li>
+                        <li><strong>Capital:</strong> R$ 75.000,00</li>
+                        <li><strong>Regime:</strong> Simples Nacional</li>
+                        <li><strong>Matriz:</strong> Curitiba - PR</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    <i class="bi bi-c-circle"></i> 2026 · Cosmos Auto Peças LTDA · 
+                    <i class="bi bi-shield-check"></i> Todos os direitos reservados
+                </p>
+                <p style="font-size: 0.75rem; color: #5a7a94;">
+                    <i class="bi bi-geo-alt"></i> Rua Aracy de Carvalho Guimarães Rosa, 310 - Cidade Industrial - Curitiba/PR - CEP: 81170-745
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== BACK TO TOP ===== -->
+    <a href="#inicio" class="back-to-top" id="backToTop" aria-label="Voltar ao topo">
+        <i class="bi bi-arrow-up"></i>
+    </a>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // ===== BACK TO TOP BUTTON =====
+        const backToTop = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // ===== NAVBAR ACTIVE LINK =====
+        const navLinks = document.querySelectorAll('.navbar-custom .nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ===== SCROLL ANIMATION TRIGGER (Intersection Observer) =====
+        const animateElements = document.querySelectorAll('.animate-up, .animate-left, .animate-right');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Força a animação a rodar
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        animateElements.forEach(el => {
+            // Pré-configura para caso o elemento já esteja visível
+            observer.observe(el);
+        });
+
+        console.log('🚗 Cosmos Auto Peças - Site carregado com sucesso!');
+        console.log('📌 CNPJ: 15.799.986/0001-89');
+        console.log('📍 Curitiba - PR');
+    </script>
+
+</body>
+</html>
